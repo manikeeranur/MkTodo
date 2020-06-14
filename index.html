@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>mk todo</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </head>
+  <style>
+    body {
+      font-family: cursive;
+    }
+    li {
+      width: 90%;
+      background-color: lightslategray;
+      color: white;
+      padding: 5px;
+      margin-bottom: 5px;
+      font-size: 2rem;
+    }
+    li:nth-child(odd) {
+      background-color: grey;
+    }
+    i span {
+      float: right;
+    }
+    .completed {
+      opacity: 0.5;
+      text-decoration: line-through;
+    }
+  </style>
+  <body>
+    <div class="container">
+      <div class="card-header">
+        <h1 class="text-center text-primary"><img src="mani-logo4.png" alt="" height="100" /> Todo App</h1>
+      </div>
+      <div class="row justify-content-between mt-5">
+        <input class="col-8 form-control" type="text" name="" id="text" placeholder="Enter Your Todo List" />
+        <button class="glyphicon glyphicon-plus-sign btn btn-primary" id="add">ADD</button>
+      </div>
+      <hr />
+      <ul id="listitem"></ul>
+    </div>
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+      integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      let todoinput = document.getElementById("text");
+      let todoadd = document.getElementById("add");
+      let listul = document.getElementById("listitem");
+
+      todoadd.addEventListener("click", function () {
+        if (todoinput.value !== "") {
+          const listlink = document.createElement("li");
+          listlink.innerText = todoinput.value;
+          listul.appendChild(listlink);
+          console.log(listlink);
+          todoinput.value = "";
+          // adding delete  icon....
+          const delicon = document.createElement("i");
+          listlink.appendChild(delicon);
+          delicon.innerHTML = `  <span class="glyphicon glyphicon-trash  btn btn-primary btn-sm"> `;
+          //adding check icon...
+          const checkicon = document.createElement("i");
+          listlink.appendChild(checkicon);
+          checkicon.innerHTML = `<span class="glyphicon glyphicon-ok mr-3  btn btn-primary btn-sm" </span>`;
+        } else {
+          alert("Please Enter Your Todo List in your Text box");
+        }
+      });
+      listul.addEventListener("click", function (event) {
+        if (event.target.className == "glyphicon glyphicon-trash  btn btn-primary btn-sm") {
+          event.target.parentElement.parentElement.remove();
+        }
+      });
+      listul.addEventListener("click", function (event) {
+        if (event.target.className == "glyphicon glyphicon-ok mr-3  btn btn-primary btn-sm") {
+          event.target.parentElement.parentElement.classList.toggle("completed");
+        }
+      });
+    </script>
+  </body>
+</html>
